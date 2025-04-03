@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('code', 8000);
+            $table->text('code');
             $table->string('output', 1000)->nullable();
             $table->boolean('is_correct')->nullable();
             $table->unsignedSmallInteger('mark')->nullable();  

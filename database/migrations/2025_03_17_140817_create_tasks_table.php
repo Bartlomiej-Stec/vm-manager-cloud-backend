@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('content', 1000);
             $table->enum('level', ['easy', 'medium', 'hard', 'insane']); 
             $table->string('input', 1000)->nullable();
-            $table->string('code', 8000);
+            $table->text('code');
             $table->string('output', 1000)->nullable();
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
