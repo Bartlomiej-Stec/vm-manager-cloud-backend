@@ -28,7 +28,7 @@ class TestKafkaProducer extends Command
                 body: ['key' => 'value'],
                 key: 'kafka key here'  
             );
-            $producer = Kafka::publish('broker:29092')
+            $producer = Kafka::publish(config('kafka.brokers'))
                 ->onTopic('codes')
                 ->withMessage($message);
 
