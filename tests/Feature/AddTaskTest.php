@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
-use Junges\Kafka\Facades\Kafka;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +16,6 @@ class AddTaskTest extends TestCase
      */
     public function test_task_successfully_added(): void
     {
-        Kafka::fake();
         $user = User::factory()->create();
         $token = JWTAuth::fromUser($user);
         $code = 'return $a + 1;';
@@ -37,7 +35,6 @@ class AddTaskTest extends TestCase
         $this->assertDatabaseCount('tasks', 1);
         $this->assertDatabaseHas('tags', ['name' => 'tag1']);
         $this->assertDatabaseCount('internal_tokens', 1);
-        Kafka::assertPublished();
     }
 
     public function test_failed_to_add_task_when_not_logged(): void

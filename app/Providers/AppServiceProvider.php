@@ -17,6 +17,7 @@ use App\Contracts\AnswerDeleter;
 use App\Contracts\CodePublisher;
 use App\Contracts\RolesAssigner;
 use App\Contracts\Auth\UserLogin;
+use App\Contracts\KafkaPublisher;
 use App\Contracts\TaskListGetter;
 use App\Contracts\Auth\UserLogout;
 use App\Contracts\PasswordUpdater;
@@ -41,6 +42,7 @@ use App\Services\CodePublisherService;
 use App\Services\RolesAssignerService;
 use App\Contracts\UserTaskAnswerGetter;
 use App\Services\Auth\UserLoginService;
+use App\Services\KafkaPublisherService;
 use App\Services\TaskListGetterService;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Auth\UserLogoutService;
@@ -94,6 +96,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PasswordUpdater::class, PasswordUpdaterService::class);
         $this->app->bind(CodePublisher::class, CodePublisherService::class);   
         $this->app->bind(InternalTokenGenerator::class, InternalTokenGeneratorService::class);   
+        $this->app->bind(KafkaPublisher::class, KafkaPublisherService::class);
     }
 
 }

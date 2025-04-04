@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Junges\Kafka\Facades\Kafka;
+use App\Contracts\KafkaPublisher;
 use Junges\Kafka\Message\Message;
 
 class TestKafkaProducer extends Command
@@ -19,24 +19,8 @@ class TestKafkaProducer extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(KafkaPublisher $kafkaPublisher)
     {
-        try {
-            // Prepare message
-            $message = new Message(
-                headers: ['header-key' => 'header-value'],
-                body: ['key' => 'value'],
-                key: 'kafka key here'  
-            );
-            $producer = Kafka::publish(config('kafka.brokers'))
-                ->onTopic('codes')
-                ->withMessage($message);
-
-            // Send message
-            $producer->send();
-            $this->info("Message sent to Kafka successfully!");
-        } catch (\Exception $e) {
-            $this->error("Failed to send message to Kafka: " . $e->getMessage());
-        }
+        echo $kafkaPublisher->publish('codes', 'Hello, Kafka!');
     }
 }

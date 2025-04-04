@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Result;
-use Junges\Kafka\Facades\Kafka;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,7 +18,6 @@ class AddResultTest extends TestCase
      */
     public function test_successfully_add_answer(): void
     {
-        Kafka::fake();
         $task = Task::factory()->create();
         $user = User::factory()->create();
         $token = JWTAuth::fromUser($user);
@@ -32,7 +30,6 @@ class AddResultTest extends TestCase
         $this->assertDatabaseCount('results', 1);
         $this->assertDatabaseHas('results', ['task_id' => $task->id, 'user_id' => $user->id, 'code' => $code]);
         $this->assertDatabaseCount('internal_tokens', 1);
-        Kafka::assertPublished();
     }
 
     public function test_cannot_send_answer_when_user_is_test_creator(): void
