@@ -6,6 +6,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Contracts\TaskAnswersList;
+use App\Http\Requests\ApplicationRequest;
 
 class GetTaskAnswersController extends Controller
 {
@@ -15,7 +16,7 @@ class GetTaskAnswersController extends Controller
 
     }
 
-    public function __invoke(Task $task, Request $request): JsonResponse
+    public function __invoke(Task $task, ApplicationRequest $request): JsonResponse
     {
         $answers = $this->taskAnswersList->get($task, $request->user());
         return $this->success($answers);

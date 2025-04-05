@@ -23,6 +23,7 @@ class JwtMiddleware
             if(!$user){
                 throw new JwtTokenException('user not found', 404);
             }
+            
             $request->merge(['user' => auth('api')->user()]);
         }  catch (JWTException $e) {
             if ($e instanceof TokenInvalidException){
