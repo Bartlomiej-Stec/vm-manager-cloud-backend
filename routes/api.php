@@ -48,16 +48,6 @@ Route::middleware([JwtMiddleware::class])->group(function () {
         Route::post('/user/{user:email}/assign-role', AssignUserRoleController::class);
         Route::delete('/user/{user:email}/role/{role}', RemoveUserRoleController::class);
     });
-
-
-    Route::get('/debug-user', function (Request $request) {
-        return response()->json([
-            'request->user()' => $request->user(),
-            'request->user("api")' => $request->user('api'),
-            'auth()->user()' => auth()->user(),
-            'auth("api")->user()' => auth('api')->user(),
-        ]);
-    });
 });
 
 Route::middleware([InternalApiMiddleware::class])->group(function () {
