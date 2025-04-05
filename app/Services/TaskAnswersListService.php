@@ -13,7 +13,7 @@ class TaskAnswersListService implements TaskAnswersList
     private const ITEMS_PER_PAGE = 20;
     public function get(Task $task, User $user): array
     {
-        if ($task->created_by !== $user->id && !$user->hasPermissionTo('delete answers')) {
+        if ($task->created_by != $user->id && !$user->hasPermissionTo('delete answers')) {
             throw new AnswerAccessException('You cannot access answers of this task', 403);
         }
 

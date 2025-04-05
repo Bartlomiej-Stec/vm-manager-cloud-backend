@@ -14,7 +14,7 @@ class TaskGetterService implements TaskGetter
             ->first();
         if ($task) {
             $tags = $task->tags()->pluck('name')->toArray();
-            if ($task->created_by !== $userId) {
+            if ($task->created_by != $userId) {
                 $task->code = null;
                 $task->output = null;
             }
