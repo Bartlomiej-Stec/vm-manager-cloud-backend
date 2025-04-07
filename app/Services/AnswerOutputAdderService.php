@@ -9,7 +9,7 @@ class AnswerOutputAdderService implements AnswerOutputAdder
 {
     private function isCorrect(?string $output, ?string $expectedOutput): bool
     {
-        return $output === $expectedOutput;
+        return $output == $expectedOutput;
     }
 
     public function add(Result $result, string $output): void

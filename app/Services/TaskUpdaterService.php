@@ -18,7 +18,7 @@ class TaskUpdaterService implements TaskUpdater
 
     public function updateTask(Task $task, AddTaskDto $dto): void
     {
-        if ($dto->createdBy !== $task->created_by) {
+        if ($dto->createdBy != $task->created_by) {
             throw new TaskNoAccessException('Task can be updated only by its creator', 403);
         }
         $task->update($dto->toArray());

@@ -10,7 +10,7 @@ class MarkSetterService implements MarkSetter
 {
     public function setMark(Result $result, int $mark, int $userId): void
     {
-        if ($result->task->created_by !== $userId) {
+        if ($result->task->created_by != $userId) {
             throw new SettingMarkNoAccessException('You cannot set mark for this answer', 403);
         }
         $result->update([
