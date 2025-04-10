@@ -28,9 +28,9 @@ class ServiceBusManagerService implements ServiceBusManager
         $token = $this->generateSasToken($uri, $sasKeyName, $sasKey);
         $response = Http::withHeaders([
             'Authorization' => $token,
-            'Content-Type' => 'application/atom+xml;type=entry;charset=utf-8',
+            'Content-Type' => 'application/json;type=entry;charset=utf-8',
             'BrokerProperties' => json_encode(["TimeToLive" => 60]),
-        ])->withBody($message, 'application/atom+xml')->post($uri);
+        ])->withBody($message, 'application/json')->post($uri);
         
         return $response->successful();
     }
