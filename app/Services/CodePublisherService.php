@@ -3,17 +3,16 @@
 namespace App\Services;
 
 use App\Contracts\CodePublisher;
-use App\Contracts\KafkaPublisher;
+use App\Contracts\ServiceBusManager;
 use App\ValueObjects\UserCodeObj;
 
 class CodePublisherService implements CodePublisher
 {
     public function __construct(
-        private KafkaPublisher $kafkaPublisher,
-    ){
+        private ServiceBusManager $serviceBusManager,
+    ) {
 
     }
-    private const TOPIC = 'codes';
 
     private function createMessage(UserCodeObj $userCode): string
     {
@@ -23,7 +22,7 @@ class CodePublisherService implements CodePublisher
     public function publish(UserCodeObj $userCode): void
     {
         $message = $this->createMessage($userCode);
-        $this->kafkaPublisher->publish(self::TOPIC, $message);
+        $this->serviceBusManager->send($message);
     }
 
 }

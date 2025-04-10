@@ -32,6 +32,7 @@ use App\Services\TaskGetterService;
 use App\Services\UserGetterService;
 use App\Contracts\AnswerOutputAdder;
 use App\Contracts\Auth\UserRegister;
+use App\Contracts\ServiceBusManager;
 use App\Services\ResultAdderService;
 use App\Services\RoleRemoverService;
 use App\Services\TaskDeleterService;
@@ -53,6 +54,7 @@ use App\Services\UserTasksGetterService;
 use App\Contracts\InternalTokenGenerator;
 use App\Services\AnswerOutputAdderService;
 use App\Services\Auth\UserRegisterService;
+use App\Services\ServiceBusManagerService;
 use App\Services\UserTaskAnswerGetterService;
 use App\Services\InternalTokenGeneratorService;
 
@@ -97,6 +99,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CodePublisher::class, CodePublisherService::class);   
         $this->app->bind(InternalTokenGenerator::class, InternalTokenGeneratorService::class);   
         $this->app->bind(KafkaPublisher::class, KafkaPublisherService::class);
+        $this->app->bind(ServiceBusManager::class, ServiceBusManagerService::class);
     }
 
 }
